@@ -1,0 +1,70 @@
+unit uMaquina;
+
+interface
+
+uses
+  uIMaquina, uTroco, Classes, System.Generics.Collections;
+
+type
+
+  TMaquina = class(TInterfacedObject, IMaquina)
+  public
+    function MontarTroco(aTroco: Double): TList<TTroco>;
+  end;
+
+implementation
+
+function TMaquina.MontarTroco(aTroco: Double): TList<TTroco>;
+var
+  cedula: TCedula;
+  quantidade: Integer;
+  valorCedula: Double;
+
+  aControle : Double;
+begin
+
+Result := TList.Create;
+  while aControle >= aTroco do
+
+  if aTroco >= 100  then
+    Result.Add(TCedula[0])
+
+
+
+  end;
+
+  Result := nil;
+end;
+
+
+{
+function TMaquinaDinheiro.MontarTroco(aTroco: Double): TList<TTroco>;
+var
+  cedula: TCedula;
+  quantidade: Integer;
+  valorCedula: Double;
+begin
+  Result := TList<TTroco>.Create;
+  try
+    for cedula := High(TCedula) downto Low(TCedula) do
+    begin
+      valorCedula := CedulasDisponiveis[cedula];
+      quantidade := Trunc(aTroco / valorCedula);
+      if quantidade > 0 then
+      begin
+        Result.Add(TTroco.Create(cedula, quantidade));
+        aTroco := aTroco - quantidade * valorCedula;
+      end;
+    end;
+    if not SameValue(aTroco, 0, 0.01) then
+    begin
+      raise Exception.Create('Não é possível compor o troco com as cédulas e moedas disponíveis.');
+    end;
+  except
+    Result.Free;
+    raise;
+  end;
+end;
+}
+end.
+

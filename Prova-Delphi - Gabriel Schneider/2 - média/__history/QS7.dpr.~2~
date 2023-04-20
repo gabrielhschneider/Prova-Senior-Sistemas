@@ -1,0 +1,22 @@
+program QS7;
+
+{$APPTYPE CONSOLE}
+
+uses
+  uTroco in 'uTroco.pas',
+  uIMaquina in 'uIMaquina.pas',
+  uMaquina in 'uMaquina.pas';
+
+{$R *.RES}
+
+var
+aMaquina : IMaquina;
+aTroco : Double;
+begin
+
+  write('Entre com o valor do troco: ');
+  readln(aTroco);
+  aMaquina := TMaquina.Create;
+  aMaquina.MontarTroco(aTroco);
+end.
+

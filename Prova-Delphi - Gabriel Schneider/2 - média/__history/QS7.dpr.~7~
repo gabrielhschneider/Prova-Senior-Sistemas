@@ -1,0 +1,35 @@
+program QS7;
+
+{$APPTYPE CONSOLE}
+
+uses
+  vcl.Dialogs, Classes, System.Generics.Collections, SysUtils,
+  uTroco in 'uTroco.pas',
+  uIMaquina in 'uIMaquina.pas',
+  uMaquina in 'uMaquina.pas';
+
+{$R *.RES}
+
+var
+  aMaquina : IMaquina;
+  aTroco : Double;
+  aListaTroco : TList<String>;
+  i : Integer;
+begin
+  aListaTroco := TList<String>.Create;
+  try
+    writeln('Entre com o valor do troco: ');
+    readln(aTroco);
+
+    aMaquina := TMaquina.Create;
+    aListaTroco := aMaquina.MontarTroco(aTroco);
+
+    for i := 1 to aListaTroco.Count do
+    begin
+      writeln(aListaTroco[i]);
+    end;
+  finally
+    //aListaTroco.Free;
+  end;
+end.
+

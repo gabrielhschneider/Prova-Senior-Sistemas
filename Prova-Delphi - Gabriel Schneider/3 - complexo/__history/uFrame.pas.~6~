@@ -1,0 +1,60 @@
+unit uFrame;
+
+interface
+
+uses
+  uComponente, uLabel, uBotao, uMemo;
+
+type
+  TFrame = class(TComponente)
+  private
+  public
+    procedure RedimensionarFrame(aAltura, aLargura: Integer);
+  end;
+
+implementation
+
+{Redimensionar}
+procedure TFrame.RedimensionarFrame(aAltura, aLargura: Integer);
+var
+  i : integer;
+begin
+  self.FAltura := aAltura;
+  self.FLargura:= aLargura;
+
+  for i := 0 to Length(self.FComponentes) do
+  begin
+    if self.FComponentes[i] is TLabel then
+    begin
+      self.FComponentes[i].SetX(self.FLargura);
+      self.FComponentes[i].SetY(self.FAltura);
+    end
+
+    else if Self.FComponentes[i] is TBotao then
+    begin
+      self.FComponentes[i].SetX(self.FLargura);
+      self.FComponentes[i].SetY(self.FAltura);
+      self.FComponentes[i].SetLargura(self.FLargura);
+    end
+
+    else if Self.FComponentes[i] is TMemo then
+    begin
+      self.FComponentes[i].SetX(self.FLargura);
+      self.FComponentes[i].SetY(self.FAltura);
+      self.FComponentes[i].SetLargura(self.FLargura);
+      self.FComponentes[i].SetAltura(self.FAltura);
+    end
+
+    else
+    begin
+      self.FComponentes[i].SetX(self.FLargura);
+      self.FComponentes[i].SetY(self.FAltura);
+      self.FComponentes[i].SetLargura(self.FLargura);
+      self.FComponentes[i].SetAltura(self.FAltura);
+    end;
+  end;
+
+end;
+
+end.
+

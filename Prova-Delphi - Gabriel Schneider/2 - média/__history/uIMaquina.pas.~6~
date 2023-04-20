@@ -1,0 +1,17 @@
+unit uIMaquina;
+
+interface
+
+uses
+  Classes, System.Generics.Collections, uTroco;
+
+type
+
+  IMaquina = interface
+    function MontarTroco(aTroco: Double): TStringList;
+  end;
+
+implementation
+
+end.
+

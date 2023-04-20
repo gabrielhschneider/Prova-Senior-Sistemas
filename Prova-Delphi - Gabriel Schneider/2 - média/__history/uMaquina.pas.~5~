@@ -1,0 +1,48 @@
+﻿unit uMaquina;
+
+interface
+
+uses
+  uIMaquina, uTroco, uConsts, Classes, System.Generics.Collections;
+
+type
+
+  TMaquina = class(TInterfacedObject, IMaquina)
+  public
+    function MontarTroco(aTroco: Double): TList<TTroco>;
+  end;
+
+implementation
+
+function TMaquina.MontarTroco(aTroco: Double): TList<TTroco>;
+const
+  Valores: array[0..11] of Double = (100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.25, 0.1, 0.05, 0.01);
+var
+  Troco: Double;
+  i, Quantidade: Integer;
+  aListaNotas : TList<TTroco>;
+begin
+  aListaNotas := TList<TTroco>.Create;
+  try
+    Troco := aTroco;
+    i := 0;
+    while Troco > 0 do
+    begin
+      Quantidade := Trunc(Troco / Valores[i]);
+      if Quantidade > 0 then
+      begin
+        aListaNotas.Add(TTroco.Create(TCedula(i), Quantidade));
+        Troco := Troco - Quantidade * Valores[i];
+      end;
+      Inc(i);
+    end;
+
+  Result := aListaNotas;
+  except
+    aListaNotas.Free;
+    raise;
+  end;
+end;
+
+end.
+

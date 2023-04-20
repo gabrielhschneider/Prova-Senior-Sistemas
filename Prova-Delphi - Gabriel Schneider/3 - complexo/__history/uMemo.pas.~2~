@@ -1,0 +1,56 @@
+unit uMemo;
+
+interface
+
+uses
+  uComponente;
+
+type
+
+  TMemo = class(TComponente)
+  private
+    FX: Integer;
+    FY: Integer;
+    FAltura: Integer;
+    FLargura: Integer;
+    FValor: String;
+  public
+    constructor Create(aX, aY, aAltura, aLargura : Integer; aValor : String);
+    procedure SetLargura(const Value: Integer); override;
+    procedure SetAltura(const Value: Integer); override;
+    procedure SetX(const Value: Integer); override;
+    procedure SetY(const Value: Integer); override;
+  end;
+
+implementation
+
+constructor TMemo.Create(aX, aY, aAltura, aLargura : Integer; aValor : String);
+begin
+  FX := aX;
+  FY := aY;
+  FAltura := aAltura;
+  FLargura:= aLargura;
+  FValor := aValor;
+end;
+
+procedure TMemo.SetLargura(const Value: Integer);
+begin
+  FLargura := Value div 2;
+end;
+
+procedure TMemo.SetAltura(const Value: Integer);
+begin
+  FAltura := Value div 2;
+end;
+
+procedure TMemo.SetX(const Value: Integer);
+begin
+    FX := Value div 2;
+end;
+
+procedure TMemo.SetY(const Value: Integer);
+begin
+  FX := Value div 2;
+end;
+end.
+

@@ -1,0 +1,65 @@
+unit uBotao;
+
+interface
+
+uses
+  uComponente;
+
+type
+
+  TBotao = class(TComponente)
+  private
+    FX: Integer;
+    FY: Integer;
+    FAltura: Integer;
+    FLargura: Integer;
+    FValor: String;
+  public
+    function GetX: Integer;
+    function GetY: Integer;
+
+    constructor Create(aX, aY, aAltura, aLargura : Integer; aValor : String);
+    procedure SetLargura(const Value: Integer); override;
+    procedure SetX(const Value: Integer); override;
+    procedure SetY(const Value: Integer); override;
+  end;
+
+implementation
+
+constructor TBotao.Create(aX, aY, aAltura, aLargura : Integer; aValor : String);
+begin
+  FX := aX;
+  FY := aY;
+  FAltura := aAltura;
+  FLargura:= aLargura;
+  FValor := aValor;
+end;
+
+{Get}
+function TBotao.GetX: Integer;
+begin
+  Result := FX;
+end;
+
+function TBotao.GetY: Integer;
+begin
+  Result := FY;
+end;
+{Set}
+procedure TBotao.SetLargura(const Value: Integer);
+begin
+  Self.FLargura := Value div 2;
+end;
+
+procedure TBotao.SetX(const Value: Integer);
+begin
+  Self.FX := Value div 2;
+end;
+
+procedure TBotao.SetY(const Value: Integer);
+begin
+    Self.FY := Value div 2;
+end;
+
+end.
+

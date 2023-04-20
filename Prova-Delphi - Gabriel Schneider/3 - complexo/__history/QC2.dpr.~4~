@@ -1,0 +1,58 @@
+program QC2;
+
+{$APPTYPE CONSOLE}
+
+uses
+  vcl.Dialogs, System.SysUtils,
+  uComponente in 'uComponente.pas',
+  uFrame in 'uFrame.pas',
+  uBotao in 'uBotao.pas',
+  uMemo in 'uMemo.pas',
+  uLabel in 'uLabel.pas';
+
+{$R *.RES}
+
+var
+  aFrame : TFrame;
+  aMemo  : TMemo;
+  aLabel : TLabel;
+  aBotao : TBotao;
+  aPrintar: TComponente;
+  aTeste : TComponenteArray;
+  i : integer;
+begin
+  aFrame := TFrame.Create(10, 10, 20, 20, '100');
+  aMemo  := TMemo.Create(5, 5, 10, 10, '50');
+  aLabel := TLabel.Create(2, 2, 5, 5, '20');
+  aBotao := TBotao.Create(1, 1, 3, 3, '10');
+
+  writeln(aMemo.GetX.ToString);
+  aBotao.AdicionaComponente(aBotao);
+
+  aFrame.AdicionaComponente(aFrame);
+  aFrame.AdicionaComponente(aMemo);
+  aFrame.AdicionaComponente(aLabel);
+  aFrame.AdicionaComponente(aBotao);
+
+
+{
+  ShowMessage(aFrame.GetComponentes[0].GetX.toString);
+  ShowMessage(aFrame.GetComponentes[0].GetY.toString);
+  ShowMessage(aFrame.GetComponentes[0].GetLargura.toString);
+  ShowMessage(aFrame.GetComponentes[0].GetAltura.toString);
+  ShowMessage(aFrame.GetComponentes[0].GetValor);}
+
+
+  aTeste := aFrame.GetComponentes;
+  for i := 0 to Length(aFrame.GetComponentes) - 1 do
+  begin
+    aPrintar := aFrame.GetComponentes[i];
+    ShowMessage(aPrintar.GetX.ToString);
+  end;
+
+
+
+  writeln('Teste');
+  readln;
+end.
+

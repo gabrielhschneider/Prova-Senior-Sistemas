@@ -1,0 +1,56 @@
+unit uSubstitui;
+
+interface
+
+uses
+  uISubstitui;
+
+type
+
+  TSubstitui = class(TInterfacedObject, ISubstitui)
+  public
+    function Substituir(aStr, aVelho, aNovo: String): String;
+  end;
+
+implementation
+
+function TSubstitui.Substituir(aStr, aVelho, aNovo: String): String;
+var
+  i, j, k: Integer;
+  aLengthString, tamVelho, tamNovo: Integer;
+  encontrou: Boolean;
+begin
+  aLengthString := Length(aStr);
+  tamVelho := Length(aVelho);
+  tamNovo := Length(aNovo);
+  Result := '';
+
+  i := 1;
+  while i <= aLengthString do
+  begin
+    encontrou := True;
+    for j := 1 to tamVelho do
+    begin
+      if (i + j - 1 > aLengthString) or (aStr[i + j - 1] <> aVelho[j]) then
+      begin
+        encontrou := False;
+        Break
+      end;
+    end;
+
+    if encontrou then
+    begin
+      for k := 1 to tamNovo do
+        Result := Result + aNovo[k];
+      i := i + tamVelho;
+    end
+    else
+    begin
+      Result := Result + aStr[i];
+      Inc(i);
+    end;
+  end;
+end;
+  
+end.
+

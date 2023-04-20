@@ -1,0 +1,64 @@
+﻿unit uMaquina;
+
+interface
+
+uses
+  uIMaquina, uTroco,  Classes, System.Generics.Collections, System.SysUtils,
+  vcl.Dialogs;
+
+type
+
+  TMaquina = class(TInterfacedObject, IMaquina)
+  public
+    function MontarTroco(aTroco: Double): TList<String>;
+  end;
+
+implementation
+
+uses
+  System.TypInfo;
+
+function TMaquina.MontarTroco(aTroco: Double): TList<String>;
+var
+  aCedula : TCedula;
+  aValorCedula : Double;
+  aQuantidade : Integer;
+  aListaDeNotas: TList<String>;
+  aStrTroco : TTroco;
+begin
+  aListaDeNotas := TList<String>.Create;
+  for aCedula := Low(TCedula) to High(TCedula) do
+  begin
+  aValorCedula := CValorCedula[aCedula];
+    if aTroco >= aValorCedula then
+    begin
+      aQuantidade := Trunc(aTroco / aValorCedula);
+
+      if aQuantidade > 0 then
+      begin
+        aStrTroco := TTroco.Create(aCedula, aQuantidade);
+
+        if aTroco > 1 then
+        begin
+          aListaDeNotas.Add(aQuantidade.ToString + ' nota(s) de R$: ' +
+          aValorCedula.ToString + ' - ' + aStrTroco.ToString);
+        end
+
+        else
+        begin
+          aListaDeNotas.Add(aQuantidade.ToString + ' moeda(s) de R$: ' +
+          FormatFloat('#,##0.00',aValorCedula) + ' - ' + aStrTroco.ToString);
+        end;
+
+        aTroco := aTroco - (aQuantidade * aValorCedula);
+      end;
+
+
+      end;
+    end;
+    Result := aListaDeNotas;
+
+end;
+
+end.
+

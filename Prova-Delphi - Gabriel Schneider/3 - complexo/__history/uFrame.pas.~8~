@@ -1,0 +1,18 @@
+unit uFrame;
+
+interface
+
+uses
+  uComponente;
+
+
+type
+  TFrame = class(TComponente)
+  private
+  public
+  end;
+
+implementation
+
+end.
+

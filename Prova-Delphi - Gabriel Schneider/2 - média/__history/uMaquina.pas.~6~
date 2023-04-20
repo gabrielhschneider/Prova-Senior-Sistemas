@@ -1,0 +1,57 @@
+﻿unit uMaquina;
+
+interface
+
+uses
+  uIMaquina, uTroco,  Classes, System.Generics.Collections, System.SysUtils;
+
+type
+
+  TMaquina = class(TInterfacedObject, IMaquina)
+  public
+    function MontarTroco(aTroco: Double): TList<TTroco>;
+  end;
+
+implementation
+
+function TMaquina.MontarTroco(aTroco: Double): TList<TTroco>;
+var
+  aCedula : TCedula;
+  aValorCedula : Double;
+  aListaTrocoString : TList<String>;
+  aListaTrocoObject : TList<TTroco>;
+  aQuantidade : Integer;
+begin
+  try
+    for aCedula := Low(TCedula) to High(TCedula) do
+    begin
+      aValorCedula := CValorCedula[aCedula];
+      if aTroco >= aValorCedula then
+      begin
+        aQuantidade := Trunc(aTroco / aValorCedula);
+
+        if aQuantidade > 0 then
+        begin
+          aListaTrocoObject.Add(TTroco.Create(aCedula, aQuantidade));
+          {aListaTrocoString.Add(aQuantidade.ToString +
+            ' nota de R$ ' + aValorCedula.ToString + ';');}
+          aTroco := aTroco - aQuantidade * aValorCedula;
+        end;
+
+
+      end;
+    end;
+
+    Result := aListaTrocoObject;
+  except
+    aListaTrocoString.Free;
+    aListaTrocoObject.Free;
+  end;
+
+
+
+Result := Nil;
+end;
+
+end.
+

@@ -1,0 +1,136 @@
+unit uFrame;
+
+interface
+
+uses
+  uComponente, uLabel, uBotao, uMemo;
+
+type
+
+  TComponenteArray = array of TComponente;
+
+  TFrame = class(TComponente)
+  private
+    FX: Integer;
+    FY: Integer;
+    FAltura: Integer;
+    FLargura: Integer;
+    FComponentes: TComponenteArray;
+    FValor: String;
+  public
+    function GetX: Integer;
+    function GetY: Integer;
+    function GetComponentes: TComponenteArray;
+
+    constructor Create(aX, aY, aAltura, aLargura : Integer; aValor : String);
+
+    procedure SetLargura(const Value: Integer);
+    procedure SetAltura(const Value: Integer);
+    procedure SetX(const Value: Integer);
+    procedure SetY(const Value: Integer);
+
+    procedure AdicionaComponente(aComponente: TComponente);
+    procedure RedimensionarFrame(aAltura, aLargura: Integer);
+  end;
+
+implementation
+
+{Constructor}
+constructor TFrame.Create(aX, aY, aAltura, aLargura : Integer; aValor : String);
+begin
+  FX := aX;
+  FY := aY;
+  FAltura := aAltura;
+  FLargura:= aLargura;
+  FValor := aValor;
+end;
+
+{Adicionar Componentes}
+procedure TFrame.AdicionaComponente(aComponente: TComponente);
+begin
+SetLength(FComponentes, Length(FComponentes) + 1);
+  FComponentes[Length(FComponentes) - 1] := aComponente;
+end;
+
+{Redimensionar}
+procedure TFrame.RedimensionarFrame(aAltura, aLargura: Integer);
+var
+  i : integer;
+begin
+  self.FAltura := aAltura;
+  self.FLargura:= aLargura;
+
+  for i := 0 to Length(self.FComponentes) do
+  begin
+    if self.FComponentes[i] is TLabel then
+    begin
+      self.FComponentes[i].SetX(self.FLargura);
+      self.FComponentes[i].SetY(self.FAltura);
+    end
+
+    else if Self.FComponentes[i] is TBotao then
+    begin
+      self.FComponentes[i].SetX(self.FLargura);
+      self.FComponentes[i].SetY(self.FAltura);
+      self.FComponentes[i].SetLargura(self.FLargura);
+    end
+
+    else if Self.FComponentes[i] is TMemo then
+    begin
+      self.FComponentes[i].SetX(self.FLargura);
+      self.FComponentes[i].SetY(self.FAltura);
+      self.FComponentes[i].SetLargura(self.FLargura);
+      self.FComponentes[i].SetAltura(self.FAltura);
+    end
+
+    else
+    begin
+      self.FComponentes[i].SetX(self.FLargura);
+      self.FComponentes[i].SetY(self.FAltura);
+      self.FComponentes[i].SetLargura(self.FLargura);
+      self.FComponentes[i].SetAltura(self.FAltura);
+    end;
+  end;
+
+
+end;
+
+{Get}
+function TFrame.GetX: Integer;
+begin
+  Result := FX;
+end;
+
+function TFrame.GetY: Integer;
+begin
+  Result := FY;
+end;
+
+function TFrame.GetComponentes: TComponenteArray;
+begin
+  Result := self.FComponentes;
+end;
+
+{Set}
+procedure TFrame.SetLargura(const Value: Integer);
+begin
+  FLargura := Value div 2;
+end;
+
+procedure TFrame.SetAltura(const Value: Integer);
+begin
+  FAltura := Value div 2;
+end;
+
+procedure TFrame.SetX(const Value: Integer);
+begin
+  FX := Value div 2;
+end;
+
+procedure TFrame.SetY(const Value: Integer);
+begin
+  FX := Value div 2;
+end;
+
+end.
+
